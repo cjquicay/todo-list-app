@@ -26,16 +26,14 @@ function deleteTaskItem(taskItem) {
 function deleteTasks() {
 }
 
+
 function editTask(taskItem) {
-    var newTaskText = prompt("Edit task:", taskItem.textContent.trim());
+    var newTaskText = prompt("Edit task:",);
 
     if (newTaskText !== null) {
         taskItem.textContent = newTaskText + ' ';
         saveTasks();
     }
-}
-
-function readTasks() {
 }
 
 function updateTask() {
@@ -74,19 +72,22 @@ function loadTasks() {
     }
 }
 
-function createTaskElement(taskText) {
+function createTaskElement(taskText) {t
     var li = document.createElement("li");
-    li.textContent = taskText;
     li.style.fontSize = "20px";
+
+    var taskSpan = document.createElement("span");
+    taskSpan.textContent = taskText;
 
     var editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.className = "edit-btn";
 
     editBtn.onclick = function () {
-        editTask(li);
+        editTask(taskSpan);
     };
 
+    li.appendChild(taskSpan);
     li.appendChild(editBtn);
 
     var deleteBtn = document.createElement("button");
@@ -101,5 +102,15 @@ function createTaskElement(taskText) {
 
     return li;
 }
+
+function editTask(taskSpan) {
+    var newTaskText = prompt("Edit task:");
+
+    if (newTaskText !== null) {
+        taskSpan.textContent = newTaskText;
+        saveTasks();
+    }
+}
+
 
 
